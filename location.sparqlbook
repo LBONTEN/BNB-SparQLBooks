@@ -1,0 +1,22 @@
+[
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "SELECT ?p ?type (COUNT (DISTINCT ?s) AS ?count) { \n  GRAPH  <http://mu.semte.ch/graphs/public> {\n    ?s a <http://www.w3.org/ns/prov#Location> ;\n        ?p ?o .\n    OPTIONAL { ?o a ?type }\n  }\n} GROUP BY ?p ?type order by ?p"
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "select * {\n    ?s ?p \"856cbc8af3fbe7390d43420e249c288596e87fbc069c601751d5c5fcd52c543b\" .\n}"
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "select * {\n    ?s a <http://www.w3.org/ns/prov#Location> ;\n        <http://www.w3.org/2000/01/rdf-schema#label> ?o .\n}"
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "select * {\n    ?s a <http://www.w3.org/ns/prov#Location> ;\n        <http://mu.semte.ch/vocabularies/ext/werkingsgebiedNiveau> ?o .\n}"
+  }
+]

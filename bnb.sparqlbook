@@ -1,0 +1,27 @@
+[
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "select distinct ?g {\n    graph ?g {\n        ?s ?p ?o .\n    }\n}"
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "select distinct ?p {\n    graph <http://mu.semte.ch/graphs/public> {\n        ?s ?p ?o .\n    }\n}"
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "select distinct ?o {\n    graph <http://mu.semte.ch/graphs/public> {\n        ?s a ?o .\n    }\n}"
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "SELECT ?type ?secondtype (COUNT (DISTINCT ?s) AS ?count) { \n  GRAPH  ?g {\n    ?s a ?type ;\n      a ?secondtype .\n  }\n} GROUP BY ?type ?secondtype ORDER BY ?count"
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "select ?p ?t (COUNT (DISTINCT ?s) AS ?count) {\n    graph <http://mu.semte.ch/graphs/public> {\n        ?s ?p ?o .\n        ?s a ?t .\n    }\n} group by ?p ?t order by ?p"
+  }
+]

@@ -1,0 +1,32 @@
+[
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "select distinct ?t {\n    GRAPH <http://mu.semte.ch/graphs/public> {\n        ?s <http://www.w3.org/2000/01/rdf-schema#label> ?o .\n        ?s a ?t\n    }\n}"
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "\nSELECT ?p ?type (COUNT (DISTINCT ?s) AS ?count) { \n  GRAPH  <http://mu.semte.ch/graphs/public> {\n    ?s a <http://data.vlaanderen.be/ns/besluit#Bestuurseenheid> ;\n        ?p ?o .\n    OPTIONAL { ?o a ?type }\n  }\n} GROUP BY ?p ?type order by ?p"
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "select ?x ?y {\n    <http://data.lblod.info/id/bestuurseenheden/d7dd13304150f5fe65bd239093ef08dfae107864d26299ac91240a88782aed54> ?p ?o\t;\n        <http://data.vlaanderen.be/ns/besluit#werkingsgebied> ?w .\n    ?w ?x ?y .\n} group by ?w"
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "select * {\n    ?s a <http://data.vlaanderen.be/ns/besluit#Bestuurseenheid> ;\n        <http://www.w3.org/2004/02/skos/core#prefLabel> ?o .\n}"
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "select * {\n    ?s a <http://data.vlaanderen.be/ns/besluit#Bestuurseenheid> ;\n        <http://data.vlaanderen.be/ns/besluit#werkingsgebied> ?o .\n    ?o a ?t\n} order by ?o limit 20"
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "select * {\n    ?s a <http://data.vlaanderen.be/ns/besluit#Bestuurseenheid> ;\n        <http://www.w3.org/2004/02/skos/core#prefLabel> ?o .\n} order by ?o limit 20"
+  }
+]

@@ -1,0 +1,87 @@
+[
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "select * {\n    ?s a <http://data.vlaanderen.be/ns/mandaat#Mandataris> .\n} limit 10"
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "SELECT ?p (COUNT (DISTINCT ?s) AS ?count) { \n  GRAPH  <http://mu.semte.ch/application> {\n    ?s a <http://data.vlaanderen.be/ns/mandaat#Mandataris> ;\n        ?p ?o .\n  }\n} GROUP BY ?p"
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "SELECT ?p (COUNT (DISTINCT ?s) AS ?count) { \n  GRAPH  <http://mu.semte.ch/graphs/public> {\n    ?s a <http://data.vlaanderen.be/ns/mandaat#Mandataris> ;\n        ?p ?o .\n  }\n} GROUP BY ?p"
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "select distinct ?p {\n    ?s a <http://data.vlaanderen.be/ns/mandaat#Mandataris> ;\n        ?p ?o .\n}"
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "select * {\n    ?s a <http://data.vlaanderen.be/ns/mandaat#Mandataris> ;\n        <http://data.vlaanderen.be/ns/mandaat#start> ?o .\n}"
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "select * {\n    <http://data.lblod.info/id/mandaten/4d3eebec5d86f3d9ac401f865d954d7ac78f2efe639f41ce8d8afb5e64edaacb> ?p ?o .\n}"
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "select * {\n    <http://data.lblod.info/id/mandatarissen/5C371FB89E5B6400090006F9> ?p ?o .\n}"
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "select * {\n    ?s <http://data.vlaanderen.be/ns/mandaat#rangorde> ?o .\n} limit 10"
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "select * {\n    ?s <http://data.vlaanderen.be/ns/mandaat#einde> ?o .\n} limit 10"
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "select * {\n    ?s <http://data.vlaanderen.be/ns/mandaat#beleidsdomein> ?o .\n} limit 10"
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "select * {\n    ?s <http://data.vlaanderen.be/ns/mandaat#isBestuurlijkeAliasVan> ?o .\n} limit 10"
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "select * {\n    ?s <http://data.vlaanderen.be/ns/mandaat#status> ?o .\n} limit 10"
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "select * {\n    ?s <http://www.w3.org/ns/org#hasMembership> ?o .\n} limit 10"
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "select * {\n    ?s <http://www.w3.org/ns/org#holds> ?o .\n} limit 10"
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "SELECT ?secondtype (COUNT (DISTINCT ?s) AS ?count) { \n  GRAPH  <http://mu.semte.ch/graphs/public> {\n    ?s a <http://data.vlaanderen.be/ns/mandaat#Mandataris> ;\n      a ?secondtype .\n  }\n} GROUP BY ?secondtype ORDER BY ?count"
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "select * {\n    <http://data.lblod.info/id/personen/1b36c89d-dc58-403f-b278-2f6916fb655c> ?p ?o .\n}"
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "select * {\n    ?s ?p <http://data.lblod.info/id/personen/1b36c89d-dc58-403f-b278-2f6916fb655c> .\n}"
+  }
+]

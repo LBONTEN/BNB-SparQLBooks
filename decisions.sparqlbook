@@ -1,0 +1,17 @@
+[
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "SELECT ?p (COUNT (DISTINCT ?s) AS ?count) { \n  GRAPH  <http://mu.semte.ch/graphs/public> {\n    ?s a <http://data.vlaanderen.be/ns/besluit#Besluit> ;\n        ?p ?o .\n  }\n} GROUP BY ?p"
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "select * {\n    <http://data.lblod.info/id/00af0f30-8732-11ec-b716-15eb1e955784> ?p ?o .\n}"
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "select * {\n    ?s <http://www.w3.org/ns/prov#startedAtTime> ?o .\n    ?s a ?type .\n}"
+  }
+]

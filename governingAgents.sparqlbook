@@ -1,0 +1,22 @@
+[
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "\nSELECT ?p ?type (COUNT (DISTINCT ?s) AS ?count) { \n  GRAPH  <http://mu.semte.ch/graphs/public> {\n    ?s a <http://data.vlaanderen.be/ns/besluit#Bestuursorgaan> ;\n        ?p ?o .\n    OPTIONAL { ?o a ?type }\n  }\n} GROUP BY ?p ?type order by ?p"
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "select * {\n    ?s a <http://data.vlaanderen.be/ns/besluit#Bestuursorgaan> ;\n        <http://www.w3.org/2004/02/skos/core#prefLabel> ?o .\n\n} limit 20"
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "select * {\n    ?s a <http://data.vlaanderen.be/ns/besluit#Bestuursorgaan> ;\n        <http://data.vlaanderen.be/ns/besluit#bestuurt> ?o .\n    ?o a ?t .\n} order by ?s limit 20"
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "select * {\n    <http://data.lblod.info/id/bestuursorganen/6aa1df100558b13c2da0c6bb5b6a46096ffb1a65c4ed2584c38be027951d99f1> ?p ?o .\n} order by ?s limit 20"
+  }
+]

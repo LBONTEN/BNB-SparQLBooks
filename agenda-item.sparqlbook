@@ -1,0 +1,127 @@
+[
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "SELECT ?p (COUNT (DISTINCT ?s) AS ?count) { \n  GRAPH  <http://mu.semte.ch/application> {\n    ?s a <http://data.vlaanderen.be/ns/besluit#Agendapunt> ;\n        ?p ?o .\n  }\n} GROUP BY ?p"
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "SELECT ?p (COUNT (DISTINCT ?s) AS ?count) { \n  GRAPH  <http://mu.semte.ch/graphs/public> {\n    ?s a <http://data.vlaanderen.be/ns/besluit#Agendapunt> ;\n        ?p ?o .\n  }\n} GROUP BY ?p"
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "select * {\n    ?s a <http://data.vlaanderen.be/ns/besluit#Agendapunt> ;\n        <http://data.vlaanderen.be/ns/besluit#aangebrachtNa> ?o .\n} order by ?s limit 10"
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "select * {\n    ?s a <http://data.vlaanderen.be/ns/besluit#Agendapunt> ;\n        <http://data.vlaanderen.be/ns/besluit#geplandOpenbaar> ?o .\n} order by ?s limit 10"
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "select * {\n    ?s a <http://data.vlaanderen.be/ns/besluit#Agendapunt> ;\n        <http://purl.org/dc/terms/title> ?o .\n} order by ?s limit 10"
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "## Subject"
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "select * {\n    ?s a <http://data.vlaanderen.be/ns/besluit#Agendapunt> ;\n        <http://purl.org/dc/terms/subject> ?o .\n} order by ?s limit 10"
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "## Openbaar"
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "select * {\n    ?s a <http://data.vlaanderen.be/ns/besluit#Agendapunt> ;\n        <http://data.vlaanderen.be/ns/besluit#openbaar> ?o .\n} order by ?s limit 10"
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "## Voorzitter"
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "## Secretaris"
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "select * {\n    ?s a <http://data.vlaanderen.be/ns/besluit#Agendapunt> ;\n        <http://data.vlaanderen.be/ns/besluit#heeftSecretaris> ?o .\n} order by ?s limit 10"
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "## Aanwezigen"
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "select * {\n    ?s a <http://data.vlaanderen.be/ns/besluit#Agendapunt> ;\n        <http://data.vlaanderen.be/ns/besluit#heeftAanwezige> ?o .\n    ?o ?x ?y .\n\n} order by ?s limit 10"
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "## Gebeurt Na\n\n"
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "select * {\n    ?s a <http://data.vlaanderen.be/ns/besluit#Agendapunt> ;\n        <http://data.vlaanderen.be/ns/besluit#gebeurtNa> ?o .\n} order by ?s limit 10"
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "select * {\n    ?s a <http://data.vlaanderen.be/ns/besluit#Agendapunt> ;\n        <http://data.vlaanderen.be/ns/besluit#heeftVoorzitter> ?o .\n} order by ?s limit 10"
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "## Stemmingen "
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "select * {\n    ?s a <http://data.vlaanderen.be/ns/besluit#Agendapunt> .\n} order by ?s"
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "select * {\n    <http://data.lblod.info/id/756f5b50-e53d-11eb-9a69-152b7b15da22> ?p ?o .\n\n}"
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "select * {\n    ?s a <http://data.vlaanderen.be/ns/besluit#Agendapunt> ;\n        <http://www.w3.org/2002/07/owl#sameAs> ?o .\n} order by ?s limit 10"
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "## Generated"
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "select * {\n    ?s a <http://data.vlaanderen.be/ns/besluit#Agendapunt> ;\n        <http://www.w3.org/ns/prov#generated> ?o .\n} order by ?o limit 10"
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "## ???"
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "select * {\n    ?s a <http://data.vlaanderen.be/ns/besluit#Agendapunt> ;\n        <http://data.vlaanderen.be/ns/besluit#Agendapunt.type> ?o .\n} order by ?s limit 10"
+  }
+]
