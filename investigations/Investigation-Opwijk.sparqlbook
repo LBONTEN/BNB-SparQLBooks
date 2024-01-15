@@ -1,0 +1,14 @@
+[
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "prefix besluit: <http://data.vlaanderen.be/ns/besluit#>\nprefix prov: <http://www.w3.org/ns/prov#>\nprefix dct: <http://purl.org/dc/terms/>\t\nprefix skos: <http://www.w3.org/2004/02/skos/core#>\nprefix mu: <http://mu.semte.ch/vocabularies/core/>\nprefix org: <http://www.w3.org/ns/org#>\nprefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nprefix mandaat: <http://data.vlaanderen.be/ns/mandaat#>\n\n\nSELECT * { \n  GRAPH <http://mu.semte.ch/graphs/public> {\n    ?zitting a besluit:Zitting ;\n      besluit:isGehoudenDoor ?orgaan .\n    \n    ?orgaan besluit:bestuurd ?eenheid .\n    ?eenheid skos:prefLabel \"Opwijk\" .\n  }\n} limit 1000\n",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "prefix besluit: <http://data.vlaanderen.be/ns/besluit#>\nprefix prov: <http://www.w3.org/ns/prov#>\nprefix dct: <http://purl.org/dc/terms/>\t\nprefix skos: <http://www.w3.org/2004/02/skos/core#>\nprefix mu: <http://mu.semte.ch/vocabularies/core/>\nprefix org: <http://www.w3.org/ns/org#>\nprefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nprefix mandaat: <http://data.vlaanderen.be/ns/mandaat#>\n\nSELECT distinct ?label_orgaan { \n  GRAPH <http://mu.semte.ch/graphs/public> {\n    ?eenheid skos:prefLabel \"Opwijk\" ;\n        org:classification ?classification_eenheid .\n    ?classification_eenheid skos:prefLabel ?label_eenheid .\n    ?orgaan besluit:bestuurt ?eenheid ;\n        org:classification ?classification_orgaan .\n    ?classification_orgaan skos:prefLabel ?label_orgaan .\n\n    ?specialisatie mandaat:isTijdspecialisatieVan ?orgaan .\n    ?zitting a besluit:Zitting ;\n        besluit:isGehoudenDoor ?specialisatie ;\n        besluit:behandelt ?agendapunt .\n  }\n} limit 1000\n",
+    "metadata": {}
+  }
+]

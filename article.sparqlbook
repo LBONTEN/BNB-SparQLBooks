@@ -1,0 +1,17 @@
+[
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "SELECT ?p (COUNT (DISTINCT ?s) AS ?count) ?t { \n  GRAPH  <http://mu.semte.ch/graphs/public> {\n    ?s a <http://data.vlaanderen.be/ns/besluit#Artikel> ;\n        ?p ?o .\n    OPTIONAL {\n      ?o a ?t\n    }\n  }\n} GROUP BY ?p ?t order by ?p"
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "prefix besluit: <http://data.vlaanderen.be/ns/besluit#>\n\n\nSELECT ?num ?val ?sameAs { \n  GRAPH <http://mu.semte.ch/graphs/public> {\n    ?s a besluit:Artikel ;\n      <http://data.europa.eu/eli/ontology#number> ?num ;\n      <http://www.w3.org/ns/prov#value> ?val .\n  }\n} limit 50"
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": ""
+  }
+]

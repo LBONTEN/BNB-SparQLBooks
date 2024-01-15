@@ -2,86 +2,151 @@
   {
     "kind": 2,
     "language": "sparql",
-    "value": "SELECT ?p ?type (COUNT (DISTINCT ?s) AS ?count) { \n  GRAPH  <http://mu.semte.ch/graphs/public> {\n    ?s a <http://data.vlaanderen.be/ns/besluit#BehandelingVanAgendapunt> ;\n        ?p ?o .\n    OPTIONAL { ?o a ?type }\n  }\n} GROUP BY ?p ?type order by ?p"
+    "value": "SELECT ?p ?type (COUNT (DISTINCT ?s) AS ?count) { \n  GRAPH  <http://mu.semte.ch/graphs/public> {\n    ?s a <http://data.vlaanderen.be/ns/besluit#BehandelingVanAgendapunt> ;\n        ?p ?o .\n    OPTIONAL { ?o a ?type }\n  }\n} GROUP BY ?p ?type order by ?p\n",
+    "metadata": {
+      "vsls_cell_id": "27b2f0a5-7c6f-4786-ab91-586ebd14d91e"
+    }
   },
   {
     "kind": 2,
     "language": "sparql",
-    "value": "select distinct ?type {\n    ?s <http://data.europa.eu/eli/ontology#date_publication> ?o .\n    ?s a ?type .\n}"
+    "value": " prefix besluit: <http://data.vlaanderen.be/ns/besluit#>  \n\nselect ?type {\n    ?s besluit:behandelt ?g ;\n        a ?type .\n} limit 100\n",
+    "metadata": {
+      "vsls_cell_id": "4cf18fac-1fa4-4132-ad31-5e87c644051c"
+    }
   },
   {
     "kind": 2,
     "language": "sparql",
-    "value": "select * {\n    ?s <http://purl.org/dc/terms/description> ?o .\n} limit 20"
+    "value": "select distinct ?type {\n    ?s <http://data.europa.eu/eli/ontology#date_publication> ?o .\n    ?s a ?type .\n}\n",
+    "metadata": {
+      "vsls_cell_id": "2c475931-3a72-4ee6-8fa8-4b9cbf4e1592"
+    }
   },
   {
     "kind": 2,
     "language": "sparql",
-    "value": "select * {\n    <http://centrale-vindplaats.lblod.info/id/eb5b8cfd-ee88-11ea-ac04-d5051b1c5aa0> ?p ?o .\n}"
+    "value": "select * {\n    ?s <http://purl.org/dc/terms/description> ?o .\n} limit 20\n",
+    "metadata": {
+      "vsls_cell_id": "75841ea1-54d6-4d0f-8a20-edd36bc00abe"
+    }
   },
   {
     "kind": 2,
     "language": "sparql",
-    "value": "select * {\n    <http://data.lblod.info/id/mandatarissen/5c325f499e5b64000900029c> ?p ?o .\n}"
+    "value": "select * {\n    <http://centrale-vindplaats.lblod.info/id/eb5b8cfd-ee88-11ea-ac04-d5051b1c5aa0> ?p ?o .\n}\n",
+    "metadata": {
+      "vsls_cell_id": "e399b72c-275c-43ac-a0d3-3458f91ce5f0"
+    }
   },
   {
     "kind": 2,
     "language": "sparql",
-    "value": "select * {\n    ?s a <http://data.vlaanderen.be/ns/besluit#BehandelingVanAgendapunt> ;\n        <http://purl.org/dc/terms/title> ?o .\n} order by ?s limit 10"
+    "value": "select * {\n    <http://data.lblod.info/id/mandatarissen/5c325f499e5b64000900029c> ?p ?o .\n}\n",
+    "metadata": {
+      "vsls_cell_id": "5e95b337-e74c-466b-8e97-7f4a7206c841"
+    }
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "select * {\n    ?s a <http://data.vlaanderen.be/ns/besluit#BehandelingVanAgendapunt> ;\n        <http://purl.org/dc/terms/title> ?o .\n} order by ?s limit 10\n",
+    "metadata": {
+      "vsls_cell_id": "a629509b-af33-4b57-872b-908f0802d0b0"
+    }
   },
   {
     "kind": 1,
     "language": "markdown",
-    "value": "### link to municipality page"
+    "value": "### link to municipality page",
+    "metadata": {
+      "vsls_cell_id": "1a6b5104-fbf5-4ed8-be6b-a59aafc866aa"
+    }
   },
   {
     "kind": 2,
     "language": "sparql",
-    "value": "select * {\n    ?s a <http://data.vlaanderen.be/ns/besluit#BehandelingVanAgendapunt> ;\n        <http://www.w3.org/2002/07/owl#sameAs> ?o .\n} order by ?s limit 10"
+    "value": "select * {\n    ?s a <http://data.vlaanderen.be/ns/besluit#BehandelingVanAgendapunt> ;\n        <http://www.w3.org/2002/07/owl#sameAs> ?o .\n} order by ?s limit 10\n",
+    "metadata": {
+      "vsls_cell_id": "e9ce348e-9e41-4eed-8a69-bea538cb80e5"
+    }
   },
   {
     "kind": 1,
     "language": "markdown",
-    "value": "### subject"
+    "value": "### subject",
+    "metadata": {
+      "vsls_cell_id": "25af05e5-0be2-434a-a83a-5fd409b52643"
+    }
   },
   {
     "kind": 2,
     "language": "sparql",
-    "value": "select ?type (COUNT (DISTINCT ?s) AS ?count) {\n    ?s a <http://data.vlaanderen.be/ns/besluit#BehandelingVanAgendapunt> ;\n        <http://purl.org/dc/terms/subject> ?o .\n    ?o a ?type .\n} group by ?type"
+    "value": "select ?type (COUNT (DISTINCT ?s) AS ?count) {\n    ?s a <http://data.vlaanderen.be/ns/besluit#BehandelingVanAgendapunt> ;\n        <http://purl.org/dc/terms/subject> ?o .\n    ?o a ?type .\n} group by ?type\n",
+    "metadata": {
+      "vsls_cell_id": "ece8fc0d-a4e7-4b9e-899d-d657c1a239bb"
+    }
   },
   {
     "kind": 2,
     "language": "sparql",
-    "value": "select * {\n    ?s a <http://data.vlaanderen.be/ns/besluit#BehandelingVanAgendapunt> ;\n        <http://data.vlaanderen.be/ns/besluit#heeftSecretaris> ?o .\n} order by ?s limit 10"
+    "value": "select * {\n    ?s a <http://data.vlaanderen.be/ns/besluit#BehandelingVanAgendapunt> ;\n        <http://data.vlaanderen.be/ns/besluit#heeftSecretaris> ?o .\n} order by ?s limit 10\n",
+    "metadata": {
+      "vsls_cell_id": "4b73abbb-dbbd-466a-a50c-f080abddfc47"
+    }
   },
   {
     "kind": 2,
     "language": "sparql",
-    "value": "select * {\n    ?s a <http://data.vlaanderen.be/ns/besluit#BehandelingVanAgendapunt> ;\n        <http://data.vlaanderen.be/ns/besluit#heeftAanwezige> ?o .\n} order by ?s limit 10"
+    "value": "select * {\n    ?s a <http://data.vlaanderen.be/ns/besluit#BehandelingVanAgendapunt> ;\n        <http://data.vlaanderen.be/ns/besluit#heeftAanwezige> ?o .\n} order by ?s limit 10\n",
+    "metadata": {
+      "vsls_cell_id": "1ad7878b-b540-4357-bd21-a4ec06d04317"
+    }
   },
   {
     "kind": 2,
     "language": "sparql",
-    "value": "select * {\n    ?s a <http://data.vlaanderen.be/ns/besluit#BehandelingVanAgendapunt> ;\n        <http://data.vlaanderen.be/ns/besluit#heeftVoorzitter> ?o .\n} order by ?s limit 10"
+    "value": "select * {\n    ?s a <http://data.vlaanderen.be/ns/besluit#BehandelingVanAgendapunt> ;\n        <http://data.vlaanderen.be/ns/besluit#heeftVoorzitter> ?o .\n} order by ?s limit 10\n",
+    "metadata": {
+      "vsls_cell_id": "1bd2059c-afda-4cdc-9dc2-37884e3fdd8f"
+    }
   },
   {
     "kind": 2,
     "language": "sparql",
-    "value": "select * {\n    ?s a <http://data.vlaanderen.be/ns/besluit#BehandelingVanAgendapunt> ;\n        <http://data.vlaanderen.be/ns/besluit#heeftStemming> ?o .\n} order by ?s limit 10"
+    "value": "select * {\n    ?s a <http://data.vlaanderen.be/ns/besluit#BehandelingVanAgendapunt> ;\n        <http://data.vlaanderen.be/ns/besluit#heeftStemming> ?o .\n} order by ?s limit 10\n",
+    "metadata": {
+      "vsls_cell_id": "76e6b78f-2bb2-4934-9431-5908bf044bca"
+    }
   },
   {
     "kind": 2,
     "language": "sparql",
-    "value": "select * {\n    ?s a <http://data.vlaanderen.be/ns/besluit#BehandelingVanAgendapunt> ;\n        <http://data.vlaanderen.be/ns/besluit#openbaar> ?o .\n} order by ?s limit 10"
+    "value": "select * {\n    ?s a <http://data.vlaanderen.be/ns/besluit#BehandelingVanAgendapunt> ;\n        <http://data.vlaanderen.be/ns/besluit#openbaar> ?o .\n} order by ?s limit 10\n",
+    "metadata": {
+      "vsls_cell_id": "bd9a10bc-fda7-4564-a072-690ba6cf668e"
+    }
   },
   {
     "kind": 2,
     "language": "sparql",
-    "value": "select * {\n    ?s a <http://data.vlaanderen.be/ns/besluit#BehandelingVanAgendapunt> ;\n        <http://www.w3.org/ns/prov#generated> ?o .\n} order by ?s limit 10"
+    "value": "select * {\n    ?s a <http://data.vlaanderen.be/ns/besluit#BehandelingVanAgendapunt> ;\n        <http://www.w3.org/ns/prov#generated> ?o .\n} order by ?s limit 10\n",
+    "metadata": {
+      "vsls_cell_id": "63a1ca9b-b235-4a32-bb18-42e0f1d0a90c"
+    }
   },
   {
     "kind": 2,
     "language": "sparql",
-    "value": "select * {\n    ?s a <http://data.vlaanderen.be/ns/besluit#BehandelingVanAgendapunt> ;\n        <http://data.vlaanderen.be/ns/besluit#gebeurtNa> ?o .\n} order by ?s limit 10"
+    "value": "select * {\n    ?s a <http://data.vlaanderen.be/ns/besluit#BehandelingVanAgendapunt> ;\n        <http://data.vlaanderen.be/ns/besluit#gebeurtNa> ?o .\n} order by ?s limit 10\n",
+    "metadata": {
+      "vsls_cell_id": "2d51c6ba-164b-47fa-b13b-b7f57dd134e3"
+    }
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "select ?p ?o {\n    <https://lblod.knokke-heist.be/LBLODWeb/id/stemmingen/523e3eb7bfb24d42a05590b63b22ba38-88002> ?p ?o .\n}\n",
+    "metadata": {}
   }
 ]

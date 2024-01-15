@@ -2,16 +2,143 @@
   {
     "kind": 2,
     "language": "sparql",
-    "value": "SELECT ?p (COUNT (DISTINCT ?s) AS ?count) { \n  GRAPH  <http://mu.semte.ch/graphs/public> {\n    ?s a <http://data.vlaanderen.be/ns/besluit#Besluit> ;\n        ?p ?o .\n  }\n} GROUP BY ?p"
+    "value": "SELECT ?p (COUNT (DISTINCT ?s) AS ?count) ?t { \n  GRAPH  <http://mu.semte.ch/graphs/public> {\n    ?s a <http://data.vlaanderen.be/ns/besluit#Besluit> ;\n        ?p ?o .\n    OPTIONAL {\n      ?o a ?t\n    }\n  }\n} GROUP BY ?p ?t order by ?p \n",
+    "metadata": {
+      "vsls_cell_id": "5a27d228-1a3f-42b6-83fd-122a32935169"
+    }
   },
   {
     "kind": 2,
     "language": "sparql",
-    "value": "select * {\n    <http://data.lblod.info/id/00af0f30-8732-11ec-b716-15eb1e955784> ?p ?o .\n}"
+    "value": "select * {\n    ?s <http://data.vlaanderen.be/ns/besluit#heeftNotulen> ?o .\n    ?s a ?st .\n    ?o a ?ot .\n} limit 200\n",
+    "metadata": {
+      "vsls_cell_id": "d242d94c-adb7-4d2f-b91c-3eec2f9e5e1d"
+    }
   },
   {
     "kind": 2,
     "language": "sparql",
-    "value": "select * {\n    ?s <http://www.w3.org/ns/prov#startedAtTime> ?o .\n    ?s a ?type .\n}"
+    "value": "SELECT * { \n  GRAPH  <http://mu.semte.ch/graphs/public> {\n    ?s a <http://data.vlaanderen.be/ns/besluit#Besluit> ;\n      <http://www.w3.org/ns/prov#value> ?val\n  }\n}\n",
+    "metadata": {
+      "vsls_cell_id": "e7c8f26c-0778-4a8d-8f13-52984f5ac0f3"
+    }
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "select * {\n    ?s <http://data.vlaanderen.be/ns/besluit#motivering> ?o .\n} limit 50\n",
+    "metadata": {
+      "vsls_cell_id": "5cbf01fc-7bfe-492d-9094-195bdd324456"
+    }
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "select ?num ?values {\n    ?s <http://www.w3.org/ns/prov#startedAtTime> ?o .\n    ?s a ?type .\n}\n",
+    "metadata": {
+      "vsls_cell_id": "05befa85-19b5-4219-a87b-8d90e4c1ce95"
+    }
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "select ?g ?st ?ot {\n    graph ?g {\n        ?s <http://purl.org/dc/terms/isPartOf> ?o .\n        ?s a ?st .\n        ?o a ?ot .\n    }\n} group by ?st ?ot\n",
+    "metadata": {
+      "vsls_cell_id": "67b5d0bb-8049-413b-bba9-d46e98122bd8"
+    }
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "select * {\n    <http://data.lblod.info/id/ebd295d0-938a-11ed-886f-7727fbba0e35> ?p ?o .\n}\n",
+    "metadata": {
+      "vsls_cell_id": "52d7309a-05a3-4ea5-9e51-750d93f98916"
+    }
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "select * {\n    ?s <http://www.w3.org/2002/07/owl#sameAs> <http://www.greenvalleybelgium.be/id/artikels/22.0915.6925.0479>\n}\n",
+    "metadata": {
+      "vsls_cell_id": "7c34f951-78f7-47e6-8eeb-4e748ba2516a"
+    }
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "PREFIX eli: <http://data.europa.eu/eli/ontology#>\nPREFIX prov: <http://www.w3.org/ns/prov#>\nselect ?artikel ?tekst\nwhere {\n  ?besluit eli:has_part ?artikel .\n  ?artikel prov:value ?tekst .\n}\n",
+    "metadata": {
+      "vsls_cell_id": "a9fc501b-1ab1-469e-bc42-d4b7c4971ad0"
+    }
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "prefix besluit: <http://data.vlaanderen.be/ns/besluit#>\nprefix prov: <http://www.w3.org/ns/prov#>\n\nSELECT datatype(?o) (COUNT (DISTINCT ?o) AS ?count){ \n  GRAPH  <http://mu.semte.ch/graphs/public> {\n    ?s a besluit:Besluit ;\n        prov:value ?o .\n  }\n} group by datatype(?o) limit 50\n",
+    "metadata": {
+      "vsls_cell_id": "6ac5f4fa-ec99-4e4f-9205-976f9b14ab50"
+    }
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nprefix xsd: <http://www.w3.org/2001/XMLSchema#>\nprefix besluit: <http://data.vlaanderen.be/ns/besluit#>\nprefix prov: <http://www.w3.org/ns/prov#>\n\ndelete {\n    GRAPH  <http://mu.semte.ch/graphs/public> {\n        ?s a besluit:Besluit ;\n            prov:value ?o .\n    }\n}\ninsert {\n    GRAPH  <http://mu.semte.ch/graphs/public> {\n        ?s a besluit:Besluit ;\n            prov:value (xsd:string(?o)) .\n    }\n}\nwhere {\n    GRAPH  <http://mu.semte.ch/graphs/public> {\n        ?s a besluit:Besluit ;\n            prov:value ?o .\n    }\n}",
+    "metadata": {
+      "vsls_cell_id": "95484bdb-b296-41cf-a4a0-6eefc578a574"
+    }
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "# PREFIX prov: <http://www.w3.org/ns/prov#>\n# PREFIX besluit: <http://data.vlaanderen.be/ns/besluit#>\n\n# DELETE {\n#     GRAPH ?g {\n#         ?s prov:value ?o .\n#     }\n# }  INSERT {\n#     GRAPH ?g {\n#         ?s prov:value ?fixed .\n#     }\n# } WHERE {\n#     GRAPH ?g {\n#         ?s a besluit:Besluit ;\n#             prov:value ?o .\n#         FILTER(datatype(?o) = \"http://www.w3.org/2000/01/rdf-schema#Literal\")\n#         BIND(STR(?o) AS ?fixed)\n#     }\n#     VALUES ?g {\n#         <http://mu.semte.ch/graphs/public>\n#     }\n# }\n",
+    "metadata": {
+      "vsls_cell_id": "16b84e07-71a2-4a26-abad-fad4e5c1f13e"
+    }
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "\nprefix dct: <http://purl.org/dc/terms/>\nselect ?p ?o \nwhere {\n    ?beh ?gen <https://schilde.meetingburger.net/rmw/d8d5570b-f484-4242-b609-f61fb1db122e/notulen#puntbesluit556040f6-2c25-4c92-8bd3-35bdd65ac2e5> ;\n        dct:subject ?agendapunt .\n    ?agendapunt ?p ?o .\n}\n",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "select ?x ?y {\n    <https://schilde.meetingburger.net/rmw/d8d5570b-f484-4242-b609-f61fb1db122e/agenda#puntbesluitd0fc1ca3-44cd-427a-bfd2-beffd8375e35> ?x ?y .\n}\n",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "prefix besluit: <http://data.vlaanderen.be/ns/besluit#>\nprefix prov: <http://www.w3.org/ns/prov#>\nprefix dct: <http://purl.org/dc/terms/>\nprefix mu: <http://mu.semte.ch/vocabularies/core/>\n    SELECT * WHERE {\n      ?agendaItem mu:uuid \"fb23e4a0-179a-11ee-abd8-f97e130a97cf\".\n      ?subject dct:subject ?agendaItem.\n    }\n",
+    "metadata": {
+      "vsls_cell_id": "a63a9795-4a7e-456d-a840-7bc7b69db48a"
+    }
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "prefix besluit: <http://data.vlaanderen.be/ns/besluit#>\nprefix prov: <http://www.w3.org/ns/prov#>\nprefix dct: <http://purl.org/dc/terms/>\nprefix mu: <http://mu.semte.ch/vocabularies/core/>\n\nSELECT ?id ?tit ?a ?val datatype(?val) { \n  GRAPH  ?g {\n    ?b a besluit:BehandelingVanAgendapunt ; \n      prov:generated ?s ;\n      dct:subject ?a .\n    ?s prov:value ?val .\n    ?a dct:title ?tit ;\n      mu:uuid \"b55032e0-2289-11ee-a9a5-f76d63e3f270\" .\n\n\n  }\n} limit 50\n",
+    "metadata": {
+      "vsls_cell_id": "7edee5c2-7c8e-4677-90e5-68ce419dcb1d"
+    }
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "prefix besluit: <http://data.vlaanderen.be/ns/besluit#>\nprefix prov: <http://www.w3.org/ns/prov#>\nprefix dct: <http://purl.org/dc/terms/>\nprefix mu: <http://mu.semte.ch/vocabularies/core/>3\n\nSELECT * { \n  GRAPH  ?g {\n    ?b a besluit:BehandelingVanAgendapunt ; \n      dct:subject ?a .\n    ?a mu:uuid \"b55032e0-2289-11ee-a9a5-f76d63e3f270\" .\n    ?s besluit:behandelt ?a .\n  }\n} limit 50\n",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "",
+    "metadata": {}
   }
 ]

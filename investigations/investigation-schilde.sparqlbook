@@ -1,0 +1,32 @@
+[
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "prefix besluit: <http://data.vlaanderen.be/ns/besluit#>\nprefix prov: <http://www.w3.org/ns/prov#>\nprefix dct: <http://purl.org/dc/terms/>\t\nprefix skos: <http://www.w3.org/2004/02/skos/core#>\nprefix mu: <http://mu.semte.ch/vocabularies/core/>\n\nSELECT ?s ?sp ?so { \n  GRAPH  <http://mu.semte.ch/graphs/public> {\n    ?s a besluit:Agendapunt ;     \n      mu:uuid \"065dd820-5149-11ee-a098-338032695468\" .\n    OPTIONAL {\n        ?behandeling dct:subject ?s ;\n            besluit:heeftStemming ?stemming .\n        ?stemming ?sp ?so .\n    }\n  }\n} limit 50",
+    "metadata": {}
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "## Inspect WasDerivedFrom",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "prefix besluit: <http://data.vlaanderen.be/ns/besluit#>\nprefix prov: <http://www.w3.org/ns/prov#>\nprefix dct: <http://purl.org/dc/terms/>\t\nprefix skos: <http://www.w3.org/2004/02/skos/core#>\nprefix mu: <http://mu.semte.ch/vocabularies/core/>\n\nSELECT ?dp ?do { \n  GRAPH  <http://mu.semte.ch/graphs/public> {\n    ?s a besluit:Agendapunt ;     \n      mu:uuid \"065dd820-5149-11ee-a098-338032695468\" .\n    OPTIONAL {\n        ?behandeling dct:subject ?s ;\n            besluit:heeftStemming ?stemming .\n        ?stemming prov:wasDerivedFrom ?derived .\n        ?derived ?dp ?do .\n    }\n  }\n} limit 50",
+    "metadata": {}
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "prefix besluit: <http://data.vlaanderen.be/ns/besluit#>\nprefix prov: <http://www.w3.org/ns/prov#>\nprefix dct: <http://purl.org/dc/terms/>\t\nprefix skos: <http://www.w3.org/2004/02/skos/core#>\nprefix mu: <http://mu.semte.ch/vocabularies/core/>\n\nselect ?zp ?zo {\n    ?s mu:uuid \"075d94e0-5149-11ee-a098-338032695468\" ;\n        ?p ?o .\n    ?zitting besluit:behandelt ?s ;\n        ?zp ?zo\n} group by ?zitting",
+    "metadata": {}
+  }
+]

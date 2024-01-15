@@ -1,0 +1,38 @@
+[
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "\nSELECT ?p (COUNT (DISTINCT ?s) AS ?count) ?t { \n  GRAPH ?g {\n    ?s a <http://vocab.deri.ie/cogs#Job> ;\n        ?p ?o .\n    OPTIONAL {\n      ?o a ?t\n    }\n  }\n} GROUP BY ?p ?t order by ?p\n",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "\nSELECT ?creator ?created ?modified ?op { \n  GRAPH ?g {\n    ?s a <http://vocab.deri.ie/cogs#Job> ;\n        <http://purl.org/dc/terms/created> ?created ;\n        <http://purl.org/dc/terms/modified> ?modified ;\n        <http://www.w3.org/ns/adms#status> ?status ;\n        <http://purl.org/dc/terms/creator> ?creator ;\n        <http://redpencil.data.gift/vocabularies/tasks/operation> ?op .\n  }\n} GROUP BY ?creator ?op ?created ?modified order by desc(?created) desc(?modified)\n",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "\nSELECT ?creator ?op ?status (COUNT (DISTINCT ?s) as ?count) { \n  GRAPH ?g {\n    ?s a <http://vocab.deri.ie/cogs#Job> ;\n        <http://purl.org/dc/terms/created> ?created ;\n        <http://purl.org/dc/terms/modified> ?modified ;\n        <http://www.w3.org/ns/adms#status> ?status ;\n        <http://purl.org/dc/terms/creator> ?creator ;\n        <http://redpencil.data.gift/vocabularies/tasks/operation> ?op .\n  }\n} GROUP BY ?status ?creator ?op\n",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "PREFIX besluit: <http://data.vlaanderen.be/ns/besluit#>\nPREFIX skos: <http://www.w3.org/2004/02/skos/core#>\nselect * \nwhere {\n   \t<https://lblod.assenede.be/LBLODWeb/id/zittingen/88ddbc559d9d4387af12ecbc5d0026eb-3164> ?p ?o .\n}\n",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "\nPREFIX besluit: <http://data.vlaanderen.be/ns/besluit#>\nPREFIX skos: <http://www.w3.org/2004/02/skos/core#>\nselect * \nwhere {\n    ?s ?p \"4955bd72cd0e4eb895fdbfab08da0284\" ;\n        a ?t .\n}\n",
+    "metadata": {}
+  }
+]

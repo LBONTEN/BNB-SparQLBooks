@@ -1,0 +1,36 @@
+[
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "SELECT ?p (COUNT (DISTINCT ?s) AS ?count) ?t { \n  GRAPH  <http://mu.semte.ch/graphs/public> {\n    ?s a <http://data.vlaanderen.be/ns/besluit#Zitting> ;\n        ?p ?o .\n    OPTIONAL {\n      ?o a ?t\n    }\n  }\n} GROUP BY ?p ?t order by ?p\n",
+    "metadata": {
+      "vsls_cell_id": "d3c1c044-2f39-4424-8dfe-ee3f8a5941dd"
+    }
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "SELECT ?s ?doc { \n  GRAPH  <http://mu.semte.ch/graphs/public> {\n    ?s a <http://data.vlaanderen.be/ns/besluit#Zitting> ;\n        <http://data.vlaanderen.be/ns/besluit#heeftNotulen> ?not .\n    ?not <http://www.w3.org/2002/07/owl#sameAs> ?doc\n  }\n}\n",
+    "metadata": {
+      "vsls_cell_id": "cb8f77bd-9ed6-4e76-9255-fab75b51f7b1"
+    }
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "## Investigating specific Session 06cb8e10-5149-11ee-a098-338032695468",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "prefix besluit: <http://data.vlaanderen.be/ns/besluit#>\nprefix skos: <http://www.w3.org/2004/02/skos/core#>\n\nSELECT ?label { \n  GRAPH  <http://mu.semte.ch/graphs/public> {\n    ?z a besluit:Zitting ; \n      besluit:isGehoudenDoor ?b .\n    ?b besluit:bestuurt ?be ;\n      skos:prefLabel ?label .\n    ?be skos:prefLabel \"Opwijk\".\n  }\n}\n",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "",
+    "metadata": {}
+  }
+]

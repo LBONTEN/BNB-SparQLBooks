@@ -1,0 +1,12 @@
+prefix besluit: <http://data.vlaanderen.be/ns/besluit#>
+prefix mandaat: <http://data.vlaanderen.be/ns/mandaat#>
+prefix concept: <http://data.vlaanderen.be/id/concept/BestuursorgaanClassificatieCode/>
+prefix prov: <http://www.w3.org/ns/prov#>
+prefix org: <http://www.w3.org/ns/org#>
+prefix skos: <http://www.w3.org/2004/02/skos/core#>
+prefix rdfs: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix dct: <http://purl.org/dc/terms/>	
+prefix mu: <http://mu.semte.ch/vocabularies/core/>
+prefix ext: <http://mu.semte.ch/vocabularies/ext/>
+prefix gift: <http://lblod.data.gift/vocabularies/organisatie/>
+prefix info: <http://data.lblod.info/id/>

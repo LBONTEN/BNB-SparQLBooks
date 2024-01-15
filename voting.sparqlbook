@@ -2,16 +2,87 @@
   {
     "kind": 1,
     "language": "markdown",
-    "value": "## Stemmingen \n"
+    "value": "## Stemmingen \n",
+    "metadata": {
+      "vsls_cell_id": "bdeffda8-0dbd-489e-8ef2-5c8f64fe2bde"
+    }
   },
   {
     "kind": 2,
     "language": "sparql",
-    "value": "SELECT ?p ?type (COUNT (DISTINCT ?s) AS ?count) { \n  GRAPH ?g {\n    ?s a <http://data.vlaanderen.be/ns/besluit#Stemming> ;\n        ?p ?o .\n    OPTIONAL { ?o a ?type }\n  }\n} GROUP BY ?p ?type order by ?p"
+    "value": "SELECT ?p ?type (COUNT (DISTINCT ?s) AS ?count) { \n  GRAPH ?g {\n    ?s a <http://data.vlaanderen.be/ns/besluit#Stemming> ;\n        ?p ?o .\n    OPTIONAL { ?o a ?type }\n  }\n} GROUP BY ?p ?type order by ?p\n",
+    "metadata": {
+      "vsls_cell_id": "f1cf7e9b-98a2-4ff5-8125-28f0a48cbefe"
+    }
   },
   {
     "kind": 2,
     "language": "sparql",
-    "value": "select * {\n    ?s a <http://data.vlaanderen.be/ns/besluit#Stemming> ;\n        <http://data.vlaanderen.be/ns/besluit#gevolg> ?o .\n  \n}"
+    "value": "prefix besluit: <http://data.vlaanderen.be/ns/besluit#>\nSELECT  distinct ?o { \n  GRAPH ?g {\n    ?stem  ;\n        besluit:onderwerp ?o .\n  }\n} limit 50\n",
+    "metadata": {
+      "vsls_cell_id": "aec081b3-1ba6-492f-8728-35f973fea289"
+    }
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "SELECT  ?uuid { \n  GRAPH ?g {\n    ?stem a <http://data.vlaanderen.be/ns/besluit#Stemming> .\n    ?ag <http://data.vlaanderen.be/ns/besluit#heeftStemming> ?stem .\n    ?ag <http://mu.semte.ch/vocabularies/core/uuid> ?uuid .\n  }\n} GROUP BY ?p ?type order by ?p\n",
+    "metadata": {
+      "vsls_cell_id": "20e63468-a7ce-4e60-9f92-7addd49155ce"
+    }
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "Query to find info about an agenda item based on its title\n===\n",
+    "metadata": {
+      "vsls_cell_id": "f610004b-06f6-4b3d-bf1a-319fd8d1e2ca"
+    }
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "\nprefix besluit: <http://data.vlaanderen.be/ns/besluit#>\nprefix prov: <http://www.w3.org/ns/prov#>\nprefix dct: <http://purl.org/dc/terms/>\n\nselect distinct ?voo ?teg ?ont {\n    ?s dct:title \"2022_GR_00116 - Het afsluiten van een overeenkomst voor verzekeringen voor de gemeente Nijlen en deelnemende besturen - goedkeuring gunningswijze en lastvoorwaarden - Goedkeuring\" ;\n        ?p ?o ;\n        <http://mu.semte.ch/vocabularies/core/uuid> ?id .\n    ?session dct:subject ?s ;\n        besluit:heeftStemming ?voting .\n    ?voting besluit:heeftVoorstander ?voo ;\n        besluit:heeftTegenstander ?teg ;\n        besluit:heeftOnthouder ?ont .\n} limit 200\n",
+    "metadata": {
+      "vsls_cell_id": "449cbb66-1c1e-4793-9857-e45e7776b892"
+    }
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "prefix besluit: <http://data.vlaanderen.be/ns/besluit#>\nprefix prov: <http://www.w3.org/ns/prov#>\nprefix dct: <http://purl.org/dc/terms/>\n\nselect distinct ?id {\n    ?s dct:title ?title ;\n        ?p ?o ;\n        <http://mu.semte.ch/vocabularies/core/uuid> ?id .\n    ?session dct:subject ?s ;\n        besluit:heeftStemming ?voting .\n    ?voting besluit:heeftVoorstander ?voo ;\n        besluit:heeftTegenstander ?teg ;\n        besluit:heeftOnthouder ?ont .\n} limit 200\n",
+    "metadata": {
+      "vsls_cell_id": "8d0a52ba-dc4d-4bcf-8f5e-d2c49cbe7585"
+    }
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "prefix besluit: <http://data.vlaanderen.be/ns/besluit#>\nprefix prov: <http://www.w3.org/ns/prov#>\nprefix dct: <http://purl.org/dc/terms/>\n\nselect * {\n    <http://data.lblod.info/id/076411c0-1536-11ee-a9f3-a53bf4f1b378> besluit:heeftVoorstander ?v ;\n        besluit:heeftTegenstander ?t ;\n        besluit:heeftOnthouder ?ont .\n}\n",
+    "metadata": {
+      "vsls_cell_id": "56e6e871-e82b-4e54-bdbb-6ac8ddbb5de8"
+    }
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "\nprefix besluit: <http://data.vlaanderen.be/ns/besluit#>\nprefix prov: <http://www.w3.org/ns/prov#>\nprefix dct: <http://purl.org/dc/terms/>\nprefix mu: <http://mu.semte.ch/vocabularies/core/>\n\nSELECT ?subj ?id ?tit { \n  GRAPH ?g {\n    ?s a <http://data.vlaanderen.be/ns/besluit#Stemming> ;\n        besluit:onderwerp ?subj .\n    ?beh besluit:heeftStemming ?s ;\n      dct:subject ?ag .\n    ?ag dct:title ?tit ;\n      mu:uuid ?id\n  }\n} limit 200\n",
+    "metadata": {
+      "vsls_cell_id": "13eb8557-c2e9-4c2c-a61f-ad2fc0902f8d"
+    }
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "select * {\n    <http://data.lblod.info/id/ba2db7e0-2eda-11ed-886f-7727fbba0e35> ?p ?o .\n}\n",
+    "metadata": {
+      "vsls_cell_id": "d7f2fc4b-0919-43f9-b77c-3490ccffcee7"
+    }
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "\nprefix besluit: <http://data.vlaanderen.be/ns/besluit#>\nprefix prov: <http://www.w3.org/ns/prov#>\nprefix dct: <http://purl.org/dc/terms/>\n\nSELECT ?gevolg { \n  GRAPH ?g {\n    ?s a <http://data.vlaanderen.be/ns/besluit#Stemming> ;\n        besluit:gevolg ?gevolg .\n  }\n} GROUP BY ?p ?type order by ?p\n",
+    "metadata": {}
   }
 ]

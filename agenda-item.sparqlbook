@@ -2,126 +2,203 @@
   {
     "kind": 2,
     "language": "sparql",
-    "value": "SELECT ?p (COUNT (DISTINCT ?s) AS ?count) { \n  GRAPH  <http://mu.semte.ch/application> {\n    ?s a <http://data.vlaanderen.be/ns/besluit#Agendapunt> ;\n        ?p ?o .\n  }\n} GROUP BY ?p"
+    "value": "prefix besluit: <http://data.vlaanderen.be/ns/besluit#>\n\nSELECT ?p (COUNT (DISTINCT ?s) AS ?count) ?t { \n  GRAPH  <http://mu.semte.ch/graphs/public> {\n    ?s a besluit:Agendapunt;\n        ?p ?o .\n    OPTIONAL {\n      ?o a ?t\n    }\n  }\n} GROUP BY ?p ?t\n",
+    "metadata": {
+      "vsls_cell_id": "aaf064b7-244b-4a53-8a4b-30e2874e0c9a"
+    }
   },
   {
     "kind": 2,
     "language": "sparql",
-    "value": "SELECT ?p (COUNT (DISTINCT ?s) AS ?count) { \n  GRAPH  <http://mu.semte.ch/graphs/public> {\n    ?s a <http://data.vlaanderen.be/ns/besluit#Agendapunt> ;\n        ?p ?o .\n  }\n} GROUP BY ?p"
-  },
-  {
-    "kind": 2,
-    "language": "sparql",
-    "value": "select * {\n    ?s a <http://data.vlaanderen.be/ns/besluit#Agendapunt> ;\n        <http://data.vlaanderen.be/ns/besluit#aangebrachtNa> ?o .\n} order by ?s limit 10"
-  },
-  {
-    "kind": 2,
-    "language": "sparql",
-    "value": "select * {\n    ?s a <http://data.vlaanderen.be/ns/besluit#Agendapunt> ;\n        <http://data.vlaanderen.be/ns/besluit#geplandOpenbaar> ?o .\n} order by ?s limit 10"
-  },
-  {
-    "kind": 2,
-    "language": "sparql",
-    "value": "select * {\n    ?s a <http://data.vlaanderen.be/ns/besluit#Agendapunt> ;\n        <http://purl.org/dc/terms/title> ?o .\n} order by ?s limit 10"
+    "value": "prefix besluit: <http://data.vlaanderen.be/ns/fl;ksdfgjl;sdfgkjsdfgsdfgsdfgewwwwwffggxxzdffsd\nSELECT ?p (count(?o) as ?count) WHERE {\n  ?s a besluit:Agendapunt ;\n  \t?p ?o .\n} LIMIT 100\n",
+    "metadata": {}
   },
   {
     "kind": 1,
     "language": "markdown",
-    "value": "## Subject"
+    "value": "## Find Agenda items that have a session",
+    "metadata": {}
   },
   {
     "kind": 2,
     "language": "sparql",
-    "value": "select * {\n    ?s a <http://data.vlaanderen.be/ns/besluit#Agendapunt> ;\n        <http://purl.org/dc/terms/subject> ?o .\n} order by ?s limit 10"
+    "value": "prefix besluit: <http://data.vlaanderen.be/ns/besluit#>\n\nselect (COUNT (DISTINCT ?registered_ag) AS ?count_reg) {\n    ?z a besluit:Zitting ;\n        besluit:behandelt ?registered_ag .\n}\n",
+    "metadata": {
+      "vsls_cell_id": "470b9b1c-4411-4a66-a4ea-452844be8097"
+    }
   },
   {
     "kind": 1,
     "language": "markdown",
-    "value": "## Openbaar"
+    "value": "## Find Agenda items that have a voting",
+    "metadata": {}
   },
   {
     "kind": 2,
     "language": "sparql",
-    "value": "select * {\n    ?s a <http://data.vlaanderen.be/ns/besluit#Agendapunt> ;\n        <http://data.vlaanderen.be/ns/besluit#openbaar> ?o .\n} order by ?s limit 10"
+    "value": "prefix besluit: <http://data.vlaanderen.be/ns/besluit#>\nprefix prov: <http://www.w3.org/ns/prov#>\nprefix dct: <http://purl.org/dc/terms/>\t\nprefix skos: <http://www.w3.org/2004/02/skos/core#>\nprefix mu: <http://mu.semte.ch/vocabularies/core/>\n\nSELECT * { \n  GRAPH  <http://mu.semte.ch/graphs/public> {\n    ?s a besluit:Agendapunt ;     \n      mu:uuid ?uuid ;    \n      dct:title ?tit .\n    ?beh dct:subject ?s ;\n      besluit:heeftStemming ?st .\n  }\n} limit 50\n",
+    "metadata": {
+      "vsls_cell_id": "9e2d87e5-e780-49c3-aa13-588b2bc1a24e"
+    }
   },
   {
     "kind": 1,
     "language": "markdown",
-    "value": "## Voorzitter"
+    "value": "## Find whether an Agenda item has a voting by UUID",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "prefix besluit: <http://data.vlaanderen.be/ns/besluit#>\nprefix prov: <http://www.w3.org/ns/prov#>\nprefix dct: <http://purl.org/dc/terms/>\t\nprefix skos: <http://www.w3.org/2004/02/skos/core#>\nprefix mu: <http://mu.semte.ch/vocabularies/core/>\n\nSELECT ?behandeling ?stemming{ \n  GRAPH  <http://mu.semte.ch/graphs/public> {\n    ?s a besluit:Agendapunt ;     \n      mu:uuid \"c8ae8d00-4e8a-11ee-9ccc-f9a6a1037b0d\" .\n    OPTIONAL {\n        ?behandeling dct:subject ?s ;\n            besluit:heeftStemming ?stemming .\n    }\n  }\n} limit 50\n",
+    "metadata": {}
   },
   {
     "kind": 1,
     "language": "markdown",
-    "value": "## Secretaris"
+    "value": "## A query to find agenda items with votings that have a list of the people that voted.",
+    "metadata": {}
   },
   {
     "kind": 2,
     "language": "sparql",
-    "value": "select * {\n    ?s a <http://data.vlaanderen.be/ns/besluit#Agendapunt> ;\n        <http://data.vlaanderen.be/ns/besluit#heeftSecretaris> ?o .\n} order by ?s limit 10"
+    "value": "prefix besluit: <http://data.vlaanderen.be/ns/besluit#>\nprefix prov: <http://www.w3.org/ns/prov#>\nprefix dct: <http://purl.org/dc/terms/>\t\nprefix skos: <http://www.w3.org/2004/02/skos/core#>\nprefix mu: <http://mu.semte.ch/vocabularies/core/>\nprefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\n\nSELECT ?uuid (xsd:integer(?teg)+xsd:integer(?voo)+xsd:integer(?ont) AS ?result) {\n    ?a a besluit:Agendapunt ;\n        mu:uuid ?uuid .\n    ?beh dct:subject ?a ;\n        besluit:heeftStemming ?stemming .\n    OPTIONAL {\n        ?stemming ?p ?o ;\n            besluit:aantalTegenstanders ?teg ;\n            besluit:aantalVoorstanders ?voo ;\n            besluit:aantalOnthouders ?ont .\n    }\n} group by ?uuid order by desc(?result) limit 100\n",
+    "metadata": {
+      "vsls_cell_id": "f9adfeac-80d5-4ff2-bcfd-5ec0caf9a026"
+    }
   },
   {
     "kind": 1,
     "language": "markdown",
-    "value": "## Aanwezigen"
+    "value": "## Find the resolution of an agenda item ",
+    "metadata": {}
   },
   {
     "kind": 2,
     "language": "sparql",
-    "value": "select * {\n    ?s a <http://data.vlaanderen.be/ns/besluit#Agendapunt> ;\n        <http://data.vlaanderen.be/ns/besluit#heeftAanwezige> ?o .\n    ?o ?x ?y .\n\n} order by ?s limit 10"
+    "value": "prefix besluit: <http://data.vlaanderen.be/ns/besluit#>\nprefix prov: <http://www.w3.org/ns/prov#>\nprefix dct: <http://purl.org/dc/terms/>\t\nprefix skos: <http://www.w3.org/2004/02/skos/core#>\nprefix mu: <http://mu.semte.ch/vocabularies/core/>\n\nSELECT ?dec ?tit ?val { \n  GRAPH  <http://mu.semte.ch/graphs/public> {\n    ?s a besluit:Agendapunt ;\n      mu:uuid \"91fd1a50-40c6-11ee-980b-d9559c487534\" ;    \n      dct:title ?tit .\n    OPTIONAL {\n      ?beh dct:subject ?s .\n      ?beh prov:generated ?dec .\n      ?dec prov:value ?val .\n    }\n  }\n} limit 1000\n",
+    "metadata": {
+      "vsls_cell_id": "849e3f5c-4d4e-4897-8880-8d36db54a9e5"
+    }
   },
   {
     "kind": 1,
     "language": "markdown",
-    "value": "## Gebeurt Na\n\n"
+    "value": "",
+    "metadata": {}
   },
   {
     "kind": 2,
     "language": "sparql",
-    "value": "select * {\n    ?s a <http://data.vlaanderen.be/ns/besluit#Agendapunt> ;\n        <http://data.vlaanderen.be/ns/besluit#gebeurtNa> ?o .\n} order by ?s limit 10"
-  },
-  {
-    "kind": 2,
-    "language": "sparql",
-    "value": "select * {\n    ?s a <http://data.vlaanderen.be/ns/besluit#Agendapunt> ;\n        <http://data.vlaanderen.be/ns/besluit#heeftVoorzitter> ?o .\n} order by ?s limit 10"
+    "value": "prefix besluit: <http://data.vlaanderen.be/ns/besluit#>\nprefix prov: <http://www.w3.org/ns/prov#>\nprefix dct: <http://purl.org/dc/terms/>\t\nprefix skos: <http://www.w3.org/2004/02/skos/core#>\nprefix mu: <http://mu.semte.ch/vocabularies/core/>\nprefix org: <http://www.w3.org/ns/org#>\n\nSELECT ?title { \n  GRAPH <http://mu.semte.ch/graphs/public> {\n    ?s a besluit:Agendapunt .\n    optional {\n      ?s dct:title ?title .\n      ?zitting a besluit:Zitting ;\n        besluit:behandelt ?s ;\n        besluit:isGehoudenDoor ?body .\n      ?body besluit:bestuurt ?unit ; \n        skos:prefLabel ?labelBody .\n      ?unit skos:prefLabel \"Houthalen-Helchteren\" .\n    }\n  }\n} limit 1000\n",
+    "metadata": {}
   },
   {
     "kind": 1,
     "language": "markdown",
-    "value": "## Stemmingen "
+    "value": "## Query to find amount of agenda items for a governing unit",
+    "metadata": {}
   },
   {
     "kind": 2,
     "language": "sparql",
-    "value": "select * {\n    ?s a <http://data.vlaanderen.be/ns/besluit#Agendapunt> .\n} order by ?s"
-  },
-  {
-    "kind": 2,
-    "language": "sparql",
-    "value": "select * {\n    <http://data.lblod.info/id/756f5b50-e53d-11eb-9a69-152b7b15da22> ?p ?o .\n\n}"
-  },
-  {
-    "kind": 2,
-    "language": "sparql",
-    "value": "select * {\n    ?s a <http://data.vlaanderen.be/ns/besluit#Agendapunt> ;\n        <http://www.w3.org/2002/07/owl#sameAs> ?o .\n} order by ?s limit 10"
+    "value": "prefix besluit: <http://data.vlaanderen.be/ns/besluit#>\nprefix prov: <http://www.w3.org/ns/prov#>\nprefix dct: <http://purl.org/dc/terms/>\t\nprefix skos: <http://www.w3.org/2004/02/skos/core#>\nprefix mu: <http://mu.semte.ch/vocabularies/core/>\nprefix org: <http://www.w3.org/ns/org#>\n\nSELECT (COUNT (DISTINCT ?s) AS ?count) { \n  GRAPH <http://mu.semte.ch/graphs/public> {\n    ?s a besluit:Agendapunt .\n    ?s dct:title ?title .\n    ?zitting a besluit:Zitting ;\n      besluit:behandelt ?s ;\n      besluit:isGehoudenDoor ?body .\n    ?body besluit:bestuurt ?unit ; \n      skos:prefLabel ?labelBody .\n    ?unit skos:prefLabel \"Izegem\" .\n  }\n} limit 1000\n",
+    "metadata": {}
   },
   {
     "kind": 1,
     "language": "markdown",
-    "value": "## Generated"
+    "value": "## Query to find Governing Body and Unit of an Agenda Item based on ID",
+    "metadata": {}
   },
   {
     "kind": 2,
     "language": "sparql",
-    "value": "select * {\n    ?s a <http://data.vlaanderen.be/ns/besluit#Agendapunt> ;\n        <http://www.w3.org/ns/prov#generated> ?o .\n} order by ?o limit 10"
+    "value": "prefix besluit: <http://data.vlaanderen.be/ns/besluit#>\nprefix prov: <http://www.w3.org/ns/prov#>\nprefix dct: <http://purl.org/dc/terms/>\t\nprefix skos: <http://www.w3.org/2004/02/skos/core#>\nprefix mu: <http://mu.semte.ch/vocabularies/core/>\nprefix org: <http://www.w3.org/ns/org#>\n\nSELECT ?title ?labelBody ?classBodyLabel ?labelUnit ?classUnitLabel { \n  GRAPH <http://mu.semte.ch/graphs/public> {\n    ?s a besluit:Agendapunt ;\n      mu:uuid \"48929910-69b8-11ee-b56c-e741b3e2335a\" .\n    optional {\n      ?s dct:title ?title .\n      ?zitting a besluit:Zitting ;\n        besluit:behandelt ?s ;\n        besluit:isGehoudenDoor ?body .\n      ?body besluit:bestuurt ?unit ; \n        skos:prefLabel ?labelBody ;\n        org:classification ?classBody .\n      ?unit skos:prefLabel ?labelUnit ;\n        org:classification ?classUnit .\n      ?classUnit skos:prefLabel ?classUnitLabel .\n      ?classBody skos:prefLabel ?classBodyLabel .\n    }\n  }\n} limit 1000\n",
+    "metadata": {}
   },
   {
     "kind": 1,
     "language": "markdown",
-    "value": "## ???"
+    "value": "## Query to find an agenda item with a linked governing Body and Unit",
+    "metadata": {}
   },
   {
     "kind": 2,
     "language": "sparql",
-    "value": "select * {\n    ?s a <http://data.vlaanderen.be/ns/besluit#Agendapunt> ;\n        <http://data.vlaanderen.be/ns/besluit#Agendapunt.type> ?o .\n} order by ?s limit 10"
+    "value": "prefix besluit: <http://data.vlaanderen.be/ns/besluit#>\nprefix prov: <http://www.w3.org/ns/prov#>\nprefix dct: <http://purl.org/dc/terms/>\t\nprefix skos: <http://www.w3.org/2004/02/skos/core#>\nprefix mu: <http://mu.semte.ch/vocabularies/core/>\nprefix org: <http://www.w3.org/ns/org#>\n\nSELECT ?uuid ?title ?labelBody ?classBodyLabel ?labelUnit ?classUnitLabel ?id { \n  GRAPH <http://mu.semte.ch/graphs/public> {\n    ?s a besluit:Agendapunt .\n    optional {\n      ?s dct:title ?title .\n      ?zitting a besluit:Zitting ;\n        besluit:behandelt ?s ;\n        besluit:isGehoudenDoor ?body .\n      ?body besluit:bestuurt ?unit ; \n        skos:prefLabel ?labelBody ;\n        besluit:classificatie ?classBody .\n      ?unit skos:prefLabel ?labelUnit ;\n        mu:uuid ?uuid ;\n        besluit:classificatie ?classUnit .\n      ?classUnit skos:prefLabel ?classUnitLabel .\n      ?classBody skos:prefLabel ?classBodyLabel ;\n        mu:uuid ?id .\n    }\n  }\n} order by ?title limit 100\n",
+    "metadata": {}
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "## Finding an agenda item based on municipality",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "prefix besluit: <http://data.vlaanderen.be/ns/besluit#>\nprefix prov: <http://www.w3.org/ns/prov#>\nprefix dct: <http://purl.org/dc/terms/>\t\nprefix skos: <http://www.w3.org/2004/02/skos/core#>\nprefix mu: <http://mu.semte.ch/vocabularies/core/>\nprefix org: <http://www.w3.org/ns/org#>\nprefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nprefix mandaat: <http://data.vlaanderen.be/ns/mandaat#>\n\n\nSELECT distinct ?label { \n  GRAPH <http://mu.semte.ch/graphs/public> {\n    ?s a besluit:Agendapunt ;\n      mu:uuid ?uuid .\n    ?zitting a besluit:Zitting ;\n        besluit:behandelt ?s ;\n        besluit:isGehoudenDoor ?gov_body .\n    ?gov_body mandaat:isTijdspecialisatieVan ?special_body .\n    ?special_body besluit:bestuurt ?gov_unit .\n    ?gov_unit besluit:werkingsgebied ?locat .\n    ?locat rdfs:label ?label .\n  }\n} order by ?label\n",
+    "metadata": {}
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "## Find agenda item based on governing unit",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "prefix besluit: <http://data.vlaanderen.be/ns/besluit#>\nprefix prov: <http://www.w3.org/ns/prov#>\nprefix dct: <http://purl.org/dc/terms/>\t\nprefix skos: <http://www.w3.org/2004/02/skos/core#>\nprefix mu: <http://mu.semte.ch/vocabularies/core/>\nprefix org: <http://www.w3.org/ns/org#>\nprefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nprefix mandaat: <http://data.vlaanderen.be/ns/mandaat#>\n\n\nSELECT ?id  { \n  GRAPH <http://mu.semte.ch/graphs/public> {\n    ?s a besluit:Agendapunt ;\n      mu:uuid ?uuid .\n    ?zitting a besluit:Zitting ;\n        besluit:behandelt ?s ;\n        besluit:isGehoudenDoor ?gov_body .\n    ?gov_body besluit:bestuurt ?gov_unit .\n    ?gov_unit mu:uuid ?id .\n  }\n} limit 5\n",
+    "metadata": {}
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "### Query that matches finds missing list of municipalities.",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "prefix besluit: <http://data.vlaanderen.be/ns/besluit#>\nprefix prov: <http://www.w3.org/ns/prov#>\nprefix dct: <http://purl.org/dc/terms/>\t\nprefix skos: <http://www.w3.org/2004/02/skos/core#>\nprefix mu: <http://mu.semte.ch/vocabularies/core/>\nprefix org: <http://www.w3.org/ns/org#>\nprefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n\nselect count(?stemming) as ?count {\n    ?agenda_item a besluit:Agendapunt ;\n        dct:title ?title .\n    ?session a besluit:Zitting ;\n        besluit:behandelt ?agenda_item ;\n        besluit:isGehoudenDoor ?orgaan .\n    ?behandeling dct:subject ?agenda_item ;\n        besluit:heeftStemming ?stemming .\n    ?stemming besluit:aantalOnthouders ?onthouders ;\n        besluit:aantalVoorstanders ?voorstanders ;\n        besluit:aantalTegenstanders ?tegenstanders .\n        \n    filter(?onthouders > 0 ) .\n    filter(?voorstanders > 0) .\n    filter(?tegenstanders > 0) .\n} \n",
+    "metadata": {}
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "### Get Agenda item without treatment",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "prefix besluit: <http://data.vlaanderen.be/ns/besluit#>\nprefix prov: <http://www.w3.org/ns/prov#>\nprefix dct: <http://purl.org/dc/terms/>\t\nprefix skos: <http://www.w3.org/2004/02/skos/core#>\nprefix mu: <http://mu.semte.ch/vocabularies/core/>\nprefix org: <http://www.w3.org/ns/org#>\nprefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n\nselect count(?stemming) as ?count {\n    ?agenda_item a besluit:Agendapunt ;\n        dct:title ?title .\n    ?session a besluit:Zitting ;\n        besluit:behandelt ?agenda_item ;\n        besluit:isGehoudenDoor ?orgaan .\n    \n    ?behandeling dct:subject ?agenda_item ;\n        besluit:heeftStemming ?stemming .\n        besluit:aantalVoorstanders ?voorstanders .\n    filter(?voorstanders <= 0) .\n} \n",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "prefix besluit: <http://data.vlaanderen.be/ns/besluit#>\nprefix prov: <http://www.w3.org/ns/prov#>\nprefix dct: <http://purl.org/dc/terms/>\t\nprefix skos: <http://www.w3.org/2004/02/skos/core#>\nprefix mu: <http://mu.semte.ch/vocabularies/core/>\nprefix org: <http://www.w3.org/ns/org#>\nprefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n\nselect count(?stemming) as ?count {\n    ?agenda_item a besluit:Agendapunt ;\n        dct:title ?title .\n    ?session a besluit:Zitting ;\n        besluit:behandelt ?agenda_item ;\n        besluit:isGehoudenDoor ?orgaan .\n    \n    ?behandeling dct:subject ?agenda_item ;\n        besluit:heeftStemming ?stemming .\n        besluit:aantalTegenstanders ?tegenstanders .\n    filter(?tegenstanders <= 0) .\n} \n",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "prefix besluit: <http://data.vlaanderen.be/ns/besluit#>\nprefix prov: <http://www.w3.org/ns/prov#>\nprefix dct: <http://purl.org/dc/terms/>\t\nprefix skos: <http://www.w3.org/2004/02/skos/core#>\nprefix mu: <http://mu.semte.ch/vocabularies/core/>\nprefix org: <http://www.w3.org/ns/org#>\nprefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n\nselect count(?stemming) as ?count {\n    ?agenda_item a besluit:Agendapunt ;\n        dct:title ?title .\n    ?session a besluit:Zitting ;\n        besluit:behandelt ?agenda_item ;\n        besluit:isGehoudenDoor ?orgaan .\n    \n    ?behandeling dct:subject ?agenda_item ;\n        besluit:heeftStemming ?stemming .\n    ?stemming besluit:aantalOnthouders ?onthouders ;\n    filter(?onthouders <= 0) .\n} \n",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "prefix besluit: <http://data.vlaanderen.be/ns/besluit#>\nprefix prov: <http://www.w3.org/ns/prov#>\nprefix dct: <http://purl.org/dc/terms/>\t\nprefix skos: <http://www.w3.org/2004/02/skos/core#>\nprefix mu: <http://mu.semte.ch/vocabularies/core/>\nprefix org: <http://www.w3.org/ns/org#>\nprefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n\nSELECT * { \n  GRAPH  <http://mu.semte.ch/graphs/public> {\n    ?s a besluit:Agendapunt;\n        mu:uuid ?o .\n    \n  }\n}limit 5\n",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "prefix besluit: <http://data.vlaanderen.be/ns/besluit#>\nprefix prov: <http://www.w3.org/ns/prov#>\nprefix dct: <http://purl.org/dc/terms/>\t\nprefix skos: <http://www.w3.org/2004/02/skos/core#>\nprefix mu: <http://mu.semte.ch/vocabularies/core/>\nprefix org: <http://www.w3.org/ns/org#>\nprefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n\nselect ?id ?title {\n    ?agenda_item a besluit:Agendapunt ;\n        dct:title ?title ;\n        mu:uuid ?id .\n    filter not exists { ?agenda_item dct:title ?title } .\n}",
+    "metadata": {}
   }
 ]

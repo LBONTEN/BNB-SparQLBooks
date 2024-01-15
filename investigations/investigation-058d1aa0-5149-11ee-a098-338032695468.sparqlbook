@@ -1,0 +1,32 @@
+[
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "prefix besluit: <http://data.vlaanderen.be/ns/besluit#>\nprefix prov: <http://www.w3.org/ns/prov#>\nprefix dct: <http://purl.org/dc/terms/>\t\nprefix skos: <http://www.w3.org/2004/02/skos/core#>\nprefix mu: <http://mu.semte.ch/vocabularies/core/>\n\nselect * {\n    ?s ?p \"16a22490-4f35-11ee-9ccc-f9a6a1037b0d\" ;\n        ?pp ?oo .\n}",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "prefix besluit: <http://data.vlaanderen.be/ns/besluit#>\nprefix prov: <http://www.w3.org/ns/prov#>\nprefix dct: <http://purl.org/dc/terms/>\t\nprefix skos: <http://www.w3.org/2004/02/skos/core#>\nprefix mu: <http://mu.semte.ch/vocabularies/core/>\n\nselect ?zitting ?uuid {\n    ?s ?p \"17c6f580-4f35-11ee-9ccc-f9a6a1037b0d\" ;\n        ?pp ?oo .\n    ?zitting besluit:behandelt ?s ;\n        mu:uuid ?uuid .\n}",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "",
+    "metadata": {}
+  }
+]

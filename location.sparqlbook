@@ -2,21 +2,37 @@
   {
     "kind": 2,
     "language": "sparql",
-    "value": "SELECT ?p ?type (COUNT (DISTINCT ?s) AS ?count) { \n  GRAPH  <http://mu.semte.ch/graphs/public> {\n    ?s a <http://www.w3.org/ns/prov#Location> ;\n        ?p ?o .\n    OPTIONAL { ?o a ?type }\n  }\n} GROUP BY ?p ?type order by ?p"
+    "value": "SELECT ?p ?type (COUNT (DISTINCT ?s) AS ?count) { \n  GRAPH  <http://mu.semte.ch/graphs/public> {\n    ?s a <http://www.w3.org/ns/prov#Location> ;\n        ?p ?o .\n    OPTIONAL { ?o a ?type }\n  }\n} GROUP BY ?p ?type order by ?p",
+    "metadata": {}
   },
   {
     "kind": 2,
     "language": "sparql",
-    "value": "select * {\n    ?s ?p \"856cbc8af3fbe7390d43420e249c288596e87fbc069c601751d5c5fcd52c543b\" .\n}"
+    "value": "SELECT ?p ?type (COUNT (DISTINCT ?s) AS ?count) { \n  GRAPH  <http://mu.semte.ch/graphs/public> {\n    ?s a <http://www.w3.org/ns/prov#Location> ;\n        ?p ?o .\n    OPTIONAL { ?o a ?type }\n  }\n} GROUP BY ?p ?type order by ?p",
+    "metadata": {}
   },
   {
     "kind": 2,
     "language": "sparql",
-    "value": "select * {\n    ?s a <http://www.w3.org/ns/prov#Location> ;\n        <http://www.w3.org/2000/01/rdf-schema#label> ?o .\n}"
+    "value": "select ?o ?l ?n {\n    ?s a <http://www.w3.org/ns/prov#Location> ;\n        <http://www.w3.org/2000/01/rdf-schema#label> ?o ;\n        <http://mu.semte.ch/vocabularies/ext/werkingsgebiedNiveau> ?n .\n\n    ?b <http://data.vlaanderen.be/ns/besluit#werkingsgebied> ?s ;\n        <http://www.w3.org/2004/02/skos/core#prefLabel> ?l .\n\n\n    \n} group by ?o order by ?o ",
+    "metadata": {}
   },
   {
     "kind": 2,
     "language": "sparql",
-    "value": "select * {\n    ?s a <http://www.w3.org/ns/prov#Location> ;\n        <http://mu.semte.ch/vocabularies/ext/werkingsgebiedNiveau> ?o .\n}"
+    "value": "prefix besluit: <http://data.vlaanderen.be/ns/besluit#>\nprefix prov: <http://www.w3.org/ns/prov#>\nprefix dct: <http://purl.org/dc/terms/>\t\nprefix skos: <http://www.w3.org/2004/02/skos/core#>\nprefix mu: <http://mu.semte.ch/vocabularies/core/>\nprefix org: <http://www.w3.org/ns/org#>\nprefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nprefix ext: <http://mu.semte.ch/vocabularies/ext/>\n\nselect distinct ?label (count(distinct ?item) as ?count) {\n    ?s a prov:Location ;\n        ext:werkingsgebiedNiveau \"Gemeente\" ;\n        rdfs:label ?label .\n    optional {\n        ?item a besluit:Agendapunt .\n        ?zitting a besluit:Zitting ;\n            besluit:behandelt ?item ;\n            besluit:isGehoudenDoor ?gov_body .\n        ?gov_body besluit:bestuurt ?gov_unit .\n        ?gov_unit besluit:werkingsgebied ?locat .\n        ?locat rdfs:label ?label .\n    }\n} group by ?label order by ?count",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "prefix besluit: <http://data.vlaanderen.be/ns/besluit#>\nprefix prov: <http://www.w3.org/ns/prov#>\nprefix dct: <http://purl.org/dc/terms/>\t\nprefix skos: <http://www.w3.org/2004/02/skos/core#>\nprefix mu: <http://mu.semte.ch/vocabularies/core/>\nprefix org: <http://www.w3.org/ns/org#>\nprefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nprefix ext: <http://mu.semte.ch/vocabularies/ext/>\n\nselect distinct ?label (count(distinct ?item) as ?count) {\n    ?s a prov:Location ;\n        ext:werkingsgebiedNiveau \"Gemeente\" ;\n        rdfs:label ?label .\n    optional {\n        ?item a besluit:Agendapunt .\n        ?zitting a besluit:Zitting ;\n            besluit:behandelt ?item ;\n            besluit:isGehoudenDoor ?gov_body .\n        IF({?gov_body besluit:bestuurt ?gov_unit}, { ?gov_body besluit:bestuurt ?gov_unit }, {\n            ?gov_body mandaat:isTijdspecialisatieVan ?spec .\n            ?spec besluit:bestuurt ?bestuurt .\n        })\n        ?gov_body besluit:bestuurt ?gov_unit .\n        ?gov_unit besluit:werkingsgebied ?locat .\n        ?locat rdfs:label ?label .\n    }\n} group by ?label order by ?count",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "prefix besluit: <http://data.vlaanderen.be/ns/besluit#>\nprefix prov: <http://www.w3.org/ns/prov#>\nprefix dct: <http://purl.org/dc/terms/>\t\nprefix skos: <http://www.w3.org/2004/02/skos/core#>\nprefix mu: <http://mu.semte.ch/vocabularies/core/>\nprefix org: <http://www.w3.org/ns/org#>\nprefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nprefix ext: <http://mu.semte.ch/vocabularies/ext/>\nprefix mandaat: <http://data.vlaanderen.be/ns/mandaat#>\n\n\nselect ?label {\n    ?locat a prov:Location ;\n        rdfs:label \"Meerhout\" .\n    ?gov_unit besluit:werkingsgebied ?locat .\n    ?gov_body besluit:bestuurt ?gov_unit ;\n        skos:prefLabel ?label .\n    ?zitting besluit:isGehoudenDoor ?gov_body .\n} ",
+    "metadata": {}
   }
 ]

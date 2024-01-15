@@ -2,26 +2,61 @@
   {
     "kind": 2,
     "language": "sparql",
-    "value": "select distinct ?g {\n    graph ?g {\n        ?s ?p ?o .\n    }\n}"
+    "value": "select distinct ?g {\n    graph ?g {\n        ?s ?p ?o .\n    }\n}",
+    "metadata": {}
   },
   {
     "kind": 2,
     "language": "sparql",
-    "value": "select distinct ?p {\n    graph <http://mu.semte.ch/graphs/public> {\n        ?s ?p ?o .\n    }\n}"
+    "value": "prefix besluit: <http://data.vlaanderen.be/ns/besluit#>\nprefix prov: <http://www.w3.org/ns/prov#>\nprefix dct: <http://purl.org/dc/terms/>\t\nprefix skos: <http://www.w3.org/2004/02/skos/core#>\nprefix mu: <http://mu.semte.ch/vocabularies/core/>\n\n\nselect ?o DATATYPE(?o) {\n    graph ?g {\n        ?s prov:wasDerivedFrom ?o .\n    }\n} group by ?o limit 100",
+    "metadata": {}
   },
   {
     "kind": 2,
     "language": "sparql",
-    "value": "select distinct ?o {\n    graph <http://mu.semte.ch/graphs/public> {\n        ?s a ?o .\n    }\n}"
+    "value": "select distinct ?p {\n    graph <http://mu.semte.ch/graphs/public> {\n        ?s ?p ?o .\n    }\n}",
+    "metadata": {}
   },
   {
     "kind": 2,
     "language": "sparql",
-    "value": "SELECT ?type ?secondtype (COUNT (DISTINCT ?s) AS ?count) { \n  GRAPH  ?g {\n    ?s a ?type ;\n      a ?secondtype .\n  }\n} GROUP BY ?type ?secondtype ORDER BY ?count"
+    "value": "select distinct ?o {\n    graph <http://mu.semte.ch/graphs/public> {\n        ?s a ?o .\n    }\n}",
+    "metadata": {}
   },
   {
     "kind": 2,
     "language": "sparql",
-    "value": "select ?p ?t (COUNT (DISTINCT ?s) AS ?count) {\n    graph <http://mu.semte.ch/graphs/public> {\n        ?s ?p ?o .\n        ?s a ?t .\n    }\n} group by ?p ?t order by ?p"
+    "value": "SELECT ?type ?secondtype (COUNT (DISTINCT ?s) AS ?count) { \n  GRAPH  ?g {\n    ?s a ?type ;\n      a ?secondtype .\n  }\n} GROUP BY ?type ?secondtype ORDER BY ?count",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "select ?p ?t (COUNT (DISTINCT ?s) AS ?count) {\n    graph <http://mu.semte.ch/graphs/public> {\n        ?s ?p ?o .\n        ?s a ?t .\n    }\n} group by ?p ?t order by ?p",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "\nprefix prov: <http://www.w3.org/ns/prov#>\n\nselect ?src_t ?p ?dest_t (COUNT (DISTINCT ?s) AS ?count) {\n    graph <http://mu.semte.ch/graphs/public> {\n        ?s prov:wasDerivedFrom ?o .\n        ?s a ?src_t .\n    }\n} group by ?src_t ?p ?dest_t order by ?p",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "select * {\n    <https://data.oud-turnhout.be/id/agendapunten/23.0525.1988.8610> ?p ?o .\n}",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "select * {\n    \n}",
+    "metadata": {}
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "",
+    "metadata": {}
   }
 ]

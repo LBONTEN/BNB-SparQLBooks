@@ -2,72 +2,37 @@
   {
     "kind": 2,
     "language": "sparql",
-    "value": "select * {\n    ?s a <http://data.vlaanderen.be/ns/mandaat#Mandataris> .\n} limit 10"
+    "value": "SELECT ?p (COUNT (DISTINCT ?s) AS ?count) ?t { \n  GRAPH  <http://mu.semte.ch/graphs/public> {\n    ?s a <http://data.vlaanderen.be/ns/mandaat#Mandataris> ;\n        ?p ?o .\n    OPTIONAL {\n      ?o a ?t\n    }\n  }\n} GROUP BY ?p ?t order by ?p"
   },
   {
     "kind": 2,
     "language": "sparql",
-    "value": "SELECT ?p (COUNT (DISTINCT ?s) AS ?count) { \n  GRAPH  <http://mu.semte.ch/application> {\n    ?s a <http://data.vlaanderen.be/ns/mandaat#Mandataris> ;\n        ?p ?o .\n  }\n} GROUP BY ?p"
+    "value": "SELECT ?p (COUNT (DISTINCT ?s) AS ?count) ?t { \n  GRAPH  <http://mu.semte.ch/graphs/public> {\n    ?s a <http://data.vlaanderen.be/ns/mandaat#Mandaat> ;\n        ?p ?o .\n    OPTIONAL {\n      ?o a ?t\n    }\n  }\n} GROUP BY ?p ?t order by ?p"
   },
   {
     "kind": 2,
     "language": "sparql",
-    "value": "SELECT ?p (COUNT (DISTINCT ?s) AS ?count) { \n  GRAPH  <http://mu.semte.ch/graphs/public> {\n    ?s a <http://data.vlaanderen.be/ns/mandaat#Mandataris> ;\n        ?p ?o .\n  }\n} GROUP BY ?p"
+    "value": "SELECT ?p (COUNT (DISTINCT ?s) AS ?count) ?t { \n  GRAPH  <http://mu.semte.ch/graphs/public> {\n    ?s a <http://mu.semte.ch/vocabularies/ext/BestuursfunctieCode> ;\n        ?p ?o .\n    OPTIONAL {\n      ?o a ?t\n    }\n  }\n} GROUP BY ?p ?t order by ?p"
   },
   {
     "kind": 2,
     "language": "sparql",
-    "value": "select distinct ?p {\n    ?s a <http://data.vlaanderen.be/ns/mandaat#Mandataris> ;\n        ?p ?o .\n}"
+    "value": "select distinct ?o {\n  GRAPH  <http://mu.semte.ch/graphs/public> {\n    ?s a <http://mu.semte.ch/vocabularies/ext/BestuursfunctieCode> ;\n        <http://www.w3.org/2004/02/skos/core#prefLabel> ?o .\n  }\n}"
   },
   {
     "kind": 2,
     "language": "sparql",
-    "value": "select * {\n    ?s a <http://data.vlaanderen.be/ns/mandaat#Mandataris> ;\n        <http://data.vlaanderen.be/ns/mandaat#start> ?o .\n}"
+    "value": "SELECT ?p (COUNT (DISTINCT ?s) AS ?count) ?t { \n  GRAPH  <http://mu.semte.ch/graphs/public> {\n    ?s a <http://www.w3.org/ns/org#Membership> ;\n        ?p ?o .\n    OPTIONAL {\n      ?o a ?t\n    }\n  }\n} GROUP BY ?p ?t order by ?p"
   },
   {
     "kind": 2,
     "language": "sparql",
-    "value": "select * {\n    <http://data.lblod.info/id/mandaten/4d3eebec5d86f3d9ac401f865d954d7ac78f2efe639f41ce8d8afb5e64edaacb> ?p ?o .\n}"
+    "value": "SELECT ?p (COUNT (DISTINCT ?s) AS ?count) ?t { \n  GRAPH  <http://mu.semte.ch/graphs/public> {\n    ?s a <http://data.vlaanderen.be/ns/mandaat#Fractie> ;\n        ?p ?o .\n    OPTIONAL {\n      ?o a ?t\n    }\n  }\n} GROUP BY ?p ?t order by ?p"
   },
   {
     "kind": 2,
     "language": "sparql",
-    "value": "select * {\n    <http://data.lblod.info/id/mandatarissen/5C371FB89E5B6400090006F9> ?p ?o .\n}"
-  },
-  {
-    "kind": 2,
-    "language": "sparql",
-    "value": "select * {\n    ?s <http://data.vlaanderen.be/ns/mandaat#rangorde> ?o .\n} limit 10"
-  },
-  {
-    "kind": 2,
-    "language": "sparql",
-    "value": "select * {\n    ?s <http://data.vlaanderen.be/ns/mandaat#einde> ?o .\n} limit 10"
-  },
-  {
-    "kind": 2,
-    "language": "sparql",
-    "value": "select * {\n    ?s <http://data.vlaanderen.be/ns/mandaat#beleidsdomein> ?o .\n} limit 10"
-  },
-  {
-    "kind": 2,
-    "language": "sparql",
-    "value": "select * {\n    ?s <http://data.vlaanderen.be/ns/mandaat#isBestuurlijkeAliasVan> ?o .\n} limit 10"
-  },
-  {
-    "kind": 2,
-    "language": "sparql",
-    "value": "select * {\n    ?s <http://data.vlaanderen.be/ns/mandaat#status> ?o .\n} limit 10"
-  },
-  {
-    "kind": 2,
-    "language": "sparql",
-    "value": "select * {\n    ?s <http://www.w3.org/ns/org#hasMembership> ?o .\n} limit 10"
-  },
-  {
-    "kind": 2,
-    "language": "sparql",
-    "value": "select * {\n    ?s <http://www.w3.org/ns/org#holds> ?o .\n} limit 10"
+    "value": "select distinct ?o {\n  GRAPH  <http://mu.semte.ch/graphs/public> {\n    ?s a <http://data.vlaanderen.be/ns/mandaat#Fractie> ;\n        <https://www.w3.org/ns/regorg#legalName> ?o .\n  }\n}"
   },
   {
     "kind": 2,
@@ -77,11 +42,11 @@
   {
     "kind": 2,
     "language": "sparql",
-    "value": "select * {\n    <http://data.lblod.info/id/personen/1b36c89d-dc58-403f-b278-2f6916fb655c> ?p ?o .\n}"
+    "value": "select ?p ?o {\n    GRAPH ?g {\n        ?s ?id \"5ebd2002-e03d-11ed-9015-0242ac1e0004\" ;\n            ?p ?o .\n        \n    }\n}"
   },
   {
     "kind": 2,
     "language": "sparql",
-    "value": "select * {\n    ?s ?p <http://data.lblod.info/id/personen/1b36c89d-dc58-403f-b278-2f6916fb655c> .\n}"
+    "value": ""
   }
 ]

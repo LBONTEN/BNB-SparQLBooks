@@ -1,0 +1,20 @@
+[
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "prefix mandaat: <http://data.vlaanderen.be/ns/mandaat#>\n\nSELECT ?p ?type (COUNT (DISTINCT ?s) AS ?count) { \n  GRAPH  <http://mu.semte.ch/graphs/public> {\n    ?s a mandaat:Fractie ;\n        ?p ?o .\n    OPTIONAL { ?o a ?type }\n  }\n} GROUP BY ?p ?type order by ?p",
+    "metadata": {}
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "select * {\n    mandaat: \n}",
+    "metadata": {}
+  }
+]

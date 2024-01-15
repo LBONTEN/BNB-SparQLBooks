@@ -1,0 +1,7 @@
+[
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "\nSELECT ?p (COUNT (DISTINCT ?s) AS ?count) ?t { \n  GRAPH  <http://mu.semte.ch/graphs/public> {\n    ?s a <http://data.europa.eu/eli/ontology#LegalExpression> ;\n        ?p ?o .\n    OPTIONAL {\n      ?o a ?t\n    }\n  }\n} GROUP BY ?p ?t order by ?p"
+  }
+]

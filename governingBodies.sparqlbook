@@ -1,0 +1,56 @@
+[
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "prefix besluit: <http://data.vlaanderen.be/ns/besluit#>\nprefix mandaat: <http://data.vlaanderen.be/ns/mandaat#>\nprefix concept: <http://data.vlaanderen.be/id/concept/BestuursorgaanClassificatieCode/>\nprefix prov: <http://www.w3.org/ns/prov#>\nprefix org: <http://www.w3.org/ns/org#>\nprefix skos: <http://www.w3.org/2004/02/skos/core#>\nprefix rdfs: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nprefix dct: <http://purl.org/dc/terms/>\t\nprefix mu: <http://mu.semte.ch/vocabularies/core/>\nprefix ext: <http://mu.semte.ch/vocabularies/ext/>\nprefix gift: <http://lblod.data.gift/vocabularies/organisatie/>\nprefix info: <http://data.lblod.info/id/>\n",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "prefix besluit: <http://data.vlaanderen.be/ns/besluit#>\nprefix prov: <http://www.w3.org/ns/prov#>\nprefix dct: <http://purl.org/dc/terms/>\t\nprefix skos: <http://www.w3.org/2004/02/skos/core#>\nprefix mu: <http://mu.semte.ch/vocabularies/core/>\n\nSELECT ?p ?type (COUNT (DISTINCT ?s) AS ?count) { \n  GRAPH  <http://mu.semte.ch/graphs/public> {\n    ?s a <http://data.vlaanderen.be/ns/besluit#Bestuursorgaan> ;\n        ?p ?o .\n    OPTIONAL { ?o a ?type }\n  }\n} GROUP BY ?p ?type order by ?p\n",
+    "metadata": {}
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "### org:classification and besluit:classificatie seem to contain the same value",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "prefix besluit: <http://data.vlaanderen.be/ns/besluit#>\nprefix info: <http://data.lblod.info/id/>\nprefix concept: <http://data.vlaanderen.be/id/concept/>\nprefix prov: <http://www.w3.org/ns/prov#>\nprefix org: <http://www.w3.org/ns/org#>\nprefix skos: <http://www.w3.org/2004/02/skos/core#>\nprefix rdfs: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nprefix dct: <http://purl.org/dc/terms/>\t\nprefix mu: <http://mu.semte.ch/vocabularies/core/>\nprefix ext: <http://mu.semte.ch/vocabularies/ext/>\nprefix gift: <http://lblod.data.gift/vocabularies/organisatie/>\n\nselect (COUNT(?s) AS ?subjects) (COUNT(?clas1) AS ?one) (COUNT(?clas2) AS ?two) {\n    ?s a besluit:Bestuursorgaan .\n    OPTIONAL {\n        ?s org:classification ?clas1 .\n        ?s besluit:classificatie ?clas2 .\n    }\n} limit 20\n",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "prefix mandaat: <http://data.vlaanderen.be/ns/mandaat#>\n\nselect * {\n    ?s a <http://data.vlaanderen.be/ns/besluit#Bestuursorgaan> ;\n        mandaat:isTijdspecialisatieVan ?o .\n} order by ?s limit 20\n",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "prefix besluit: <http://data.vlaanderen.be/ns/besluit#>\nprefix org: <http://www.w3.org/ns/org#>\nprefix skos: <http://www.w3.org/2004/02/skos/core#>\nprefix mu: <http://mu.semte.ch/vocabularies/core/>\n\nselect ?uuid ?label (COUNT (DISTINCT ?govU) AS ?count)  {\n    ?govU a besluit:Bestuursorgaan ;\n        org:classification ?classific .\n    ?classific skos:prefLabel ?label ;\n        mu:uuid ?uuid .\n} group by ?label ?uuid order by desc(?count)\n",
+    "metadata": {}
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "## Query to find the relationship between locations and classifications",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "prefix besluit: <http://data.vlaanderen.be/ns/besluit#>\nprefix info: <http://data.lblod.info/id/>\nprefix concept: <http://data.vlaanderen.be/id/concept/>\nprefix prov: <http://www.w3.org/ns/prov#>\nprefix org: <http://www.w3.org/ns/org#>\nprefix skos: <http://www.w3.org/2004/02/skos/core#>\nprefix rdfs: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nprefix dct: <http://purl.org/dc/terms/>\t\nprefix mu: <http://mu.semte.ch/vocabularies/core/>\nprefix ext: <http://mu.semte.ch/vocabularies/ext/>\nprefix gift: <http://lblod.data.gift/vocabularies/organisatie/>\n\nselect ?clas1 ?locat {\n    ?s a besluit:Bestuursorgaan ;\n        org:classification ?clas1 ; \n        besluit:bestuurt ?unit .\n    ?unit besluit:werkingsgebied ?locat .\n\n\n        \n} limit 100\n",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "prefix besluit: <http://data.vlaanderen.be/ns/besluit#>\nprefix info: <http://data.lblod.info/id/>\nprefix concept: <http://data.vlaanderen.be/id/concept/>\nprefix prov: <http://www.w3.org/ns/prov#>\nprefix org: <http://www.w3.org/ns/org#>\nprefix skos: <http://www.w3.org/2004/02/skos/core#>\nprefix rdfs: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nprefix dct: <http://purl.org/dc/terms/>\t\nprefix mu: <http://mu.semte.ch/vocabularies/core/>\nprefix ext: <http://mu.semte.ch/vocabularies/ext/>\nprefix gift: <http://lblod.data.gift/vocabularies/organisatie/>\n\nselect * {\n    ?s ?p \"Gemeenteraad Oostrozebeke\" ;\n        a ?t .\n}\n",
+    "metadata": {}
+  }
+]
